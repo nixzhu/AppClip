@@ -15,6 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         print("open url: \(url)")
+        guard let tabVC = window?.rootViewController as? UITabBarController else { return false }
+        switch url.lastPathComponent {
+        case "tab1":
+            tabVC.selectedIndex = 0
+        case "tab2":
+            tabVC.selectedIndex = 1
+        default:
+            break
+        }
         return true
     }
 

@@ -11,12 +11,7 @@ import AppClip
 
 class FirstViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
     @IBAction func createAppClip(_ sender: UIButton) {
-        AppClip.create(urlScheme: "icepack://com.nixWork.IcePack/new")
+        AppClip.create(urlScheme: "icepack://com.nixWork.IcePack/tab1")
     }
 }

@@ -35,8 +35,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jdi-X9-DRX">
-                                <rect key="frame" x="158" y="433" width="59" height="30"/>
-                                <state key="normal" title="Let's go!"/>
+                                <rect key="frame" x="89" y="419.5" width="198" height="30"/>
+                                <state key="normal" title="Create AppClip for First View"/>
                                 <connections>
                                     <action selector="createAppClip:" destination="9pv-A4-QxB" eventType="touchUpInside" id="c5O-3L-EVX"/>
                                 </connections>
@@ -48,7 +48,7 @@
                             <constraint firstItem="Jdi-X9-DRX" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="UoO-So-Y8c"/>
                             <constraint firstItem="A5M-7J-77L" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="8" symbolic="YES" id="cfb-er-3JN"/>
                             <constraint firstItem="A5M-7J-77L" firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="e1l-AV-tCB"/>
-                            <constraint firstItem="Jdi-X9-DRX" firstAttribute="top" secondItem="A5M-7J-77L" secondAttribute="bottom" constant="53.5" id="eeh-Lv-23O"/>
+                            <constraint firstItem="Jdi-X9-DRX" firstAttribute="top" secondItem="A5M-7J-77L" secondAttribute="bottom" constant="40" id="eeh-Lv-23O"/>
                             <constraint firstAttribute="centerY" secondItem="KQZ-1w-vlD" secondAttribute="centerY" id="exm-UA-ej4"/>
                         </constraints>
                     </view>
@@ -83,11 +83,20 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdh-9T-MdX">
+                                <rect key="frame" x="78" y="419.5" width="220" height="30"/>
+                                <state key="normal" title="Create AppClip for Second View"/>
+                                <connections>
+                                    <action selector="createAppClip:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="y8y-Xa-gC6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="NDk-cv-Gan" firstAttribute="top" secondItem="zEq-FU-wV5" secondAttribute="bottom" constant="8" symbolic="YES" id="Day-4N-Vmt"/>
                             <constraint firstItem="NDk-cv-Gan" firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="JgO-Fn-dHn"/>
+                            <constraint firstItem="gdh-9T-MdX" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="Ouz-KQ-air"/>
+                            <constraint firstItem="gdh-9T-MdX" firstAttribute="top" secondItem="NDk-cv-Gan" secondAttribute="bottom" constant="40" id="URD-xR-PbU"/>
                             <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
                             <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
                         </constraints>
