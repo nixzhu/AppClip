@@ -20,6 +20,7 @@
 		504B651B1F170A9F00E43B3E /* AppClip.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 504B65051F170A9E00E43B3E /* AppClip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		504B65241F170E0500E43B3E /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B65231F170E0500E43B3E /* Socket.swift */; };
 		504B65261F1715FE00E43B3E /* HTTPServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B65251F1715FE00E43B3E /* HTTPServer.swift */; };
+		504B65281F17206100E43B3E /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B65271F17206100E43B3E /* HTTPRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		504B65161F170A9F00E43B3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		504B65231F170E0500E43B3E /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		504B65251F1715FE00E43B3E /* HTTPServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPServer.swift; sourceTree = "<group>"; };
+		504B65271F17206100E43B3E /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				504B65071F170A9E00E43B3E /* AppClip.h */,
 				504B65231F170E0500E43B3E /* Socket.swift */,
 				504B65251F1715FE00E43B3E /* HTTPServer.swift */,
+				504B65271F17206100E43B3E /* HTTPRequest.swift */,
 				504B65081F170A9E00E43B3E /* Info.plist */,
 			);
 			path = AppClip;
@@ -318,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				504B65281F17206100E43B3E /* HTTPRequest.swift in Sources */,
 				504B65261F1715FE00E43B3E /* HTTPServer.swift in Sources */,
 				504B65241F170E0500E43B3E /* Socket.swift in Sources */,
 			);
