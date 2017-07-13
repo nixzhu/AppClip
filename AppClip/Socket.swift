@@ -21,7 +21,7 @@ class Socket {
     }
 
     private var shutdown = false
-    func close() {
+    private func close() {
         if shutdown {
             return
         }
@@ -29,11 +29,11 @@ class Socket {
         Socket.close(self.socketFileDescriptor)
     }
 
-    class func close(_ socket: Int32) {
+    fileprivate class func close(_ socket: Int32) {
         _ = Darwin.close(socket)
     }
 
-    class func setNoSigPipe(_ socket: Int32) {
+    fileprivate class func setNoSigPipe(_ socket: Int32) {
         var no_sig_pipe: Int32 = 1
         setsockopt(socket, SOL_SOCKET, SO_NOSIGPIPE, &no_sig_pipe, socklen_t(MemoryLayout<Int32>.size))
     }
@@ -46,6 +46,7 @@ extension Socket {
         case socketSettingReUseAddrFailed
         case bindFailed
         case listenFailed
+        case acceptFailed
     }
 
     class func tcpSocketForListen(address: String? = nil, port: in_port_t, maxPendingConnection: Int32 = SOMAXCONN) throws -> Socket {
@@ -87,5 +88,16 @@ extension Socket {
         }
 
         return Socket(socketFileDescriptor: socketFileDescriptor)
+    }
+
+    func acceptClientSocket() throws -> Socket {
+        var addr = sockaddr()
+        var len: socklen_t = 0
+        let clientSocket = accept(socketFileDescriptor, &addr, &len)
+        if clientSocket == -1 {
+            throw Error.acceptFailed
+        }
+        Socket.setNoSigPipe(clientSocket)
+        return Socket(socketFileDescriptor: clientSocket)
     }
 }
