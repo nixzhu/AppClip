@@ -39,7 +39,8 @@ public class HTTPServer {
             let request = try parser.readHTTPRequest(socket)
             print("request: \(request)")
 
-            if request.path == "/data" {
+            switch request.path {
+            case "/success":
                 var htmlLines: [String] = []
                 htmlLines.append("<html>")
                 htmlLines.append("<head>")
@@ -53,8 +54,19 @@ public class HTTPServer {
                 let htmlString = htmlLines.joined()
                 let response = HTTPResponse.ok(htmlString: htmlString)
                 try respond(socket, with: response)
-            } else {
-                let response = HTTPResponse.movedPermanently(location: "/data", htmlString: "")
+            default:
+                let location = "data:text/html;charset=UTF-8,<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/><meta name='apple-mobile-web-app-capable' content='yes'/></head><body><h1>Space</h1></body></html>"
+                var htmlLines: [String] = []
+                htmlLines.append("<html>")
+                htmlLines.append("<head>")
+                htmlLines.append("<title>Redirecting</title>")
+                htmlLines.append("</head>")
+                htmlLines.append("<body>")
+                htmlLines.append("<h1>Redirecting...</h1>")
+                htmlLines.append("</body>")
+                htmlLines.append("</html>")
+                let htmlString = htmlLines.joined()
+                let response = HTTPResponse.movedPermanently(location: location, htmlString: htmlString)
                 try respond(socket, with: response)
             }
         } catch {
@@ -73,10 +85,12 @@ public class HTTPServer {
             lines.append("HTTP/1.1 301 Moved Permanently")
             lines.append("Location: \(location)")
         }
+        let htmlString = response.htmlString
         lines.append("Content-Type: text/html")
-        lines.append("Content-Length: \(response.htmlString.characters.count)")
+        lines.append("Content-Length: \(htmlString.characters.count)")
         lines.append("")
-        lines.append(response.htmlString)
+        lines.append(htmlString)
+
         let string = lines.joined(separator: "\r\n")
         try socket.writeUTF8(string)
     }
