@@ -21,7 +21,7 @@ class Socket {
     }
 
     private var shutdown = false
-    private func close() {
+    func close() {
         if shutdown {
             return
         }
@@ -31,6 +31,7 @@ class Socket {
 
     fileprivate class func close(_ socket: Int32) {
         _ = Darwin.close(socket)
+        print("close socket: \(socket)")
     }
 
     fileprivate class func setNoSigPipe(_ socket: Int32) {

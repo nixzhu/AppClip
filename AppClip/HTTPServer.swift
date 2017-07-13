@@ -41,5 +41,6 @@ public class HTTPServer {
         } catch {
             print(error)
         }
+        socket.close()
     }
 }
