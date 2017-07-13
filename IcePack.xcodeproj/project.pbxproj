@@ -18,6 +18,7 @@
 		504B65171F170A9F00E43B3E /* AppClip.h in Headers */ = {isa = PBXBuildFile; fileRef = 504B65071F170A9E00E43B3E /* AppClip.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		504B651A1F170A9F00E43B3E /* AppClip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504B65051F170A9E00E43B3E /* AppClip.framework */; };
 		504B651B1F170A9F00E43B3E /* AppClip.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 504B65051F170A9E00E43B3E /* AppClip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		504B65241F170E0500E43B3E /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B65231F170E0500E43B3E /* Socket.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		504B650D1F170A9E00E43B3E /* AppClipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppClipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		504B65141F170A9F00E43B3E /* AppClipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppClipTests.swift; sourceTree = "<group>"; };
 		504B65161F170A9F00E43B3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		504B65231F170E0500E43B3E /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				504B65071F170A9E00E43B3E /* AppClip.h */,
+				504B65231F170E0500E43B3E /* Socket.swift */,
 				504B65081F170A9E00E43B3E /* Info.plist */,
 			);
 			path = AppClip;
@@ -240,6 +243,7 @@
 					};
 					504B65041F170A9E00E43B3E = {
 						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					504B650C1F170A9E00E43B3E = {
@@ -311,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				504B65241F170E0500E43B3E /* Socket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,6 +465,7 @@
 		504B64FE1F170A3A00E43B3E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = IcePack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -472,6 +478,7 @@
 		504B64FF1F170A3A00E43B3E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = IcePack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -484,6 +491,7 @@
 		504B651D1F170A9F00E43B3E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -497,6 +505,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nixWork.AppClip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -506,6 +515,7 @@
 		504B651E1F170A9F00E43B3E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -572,6 +582,7 @@
 				504B64FF1F170A3A00E43B3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		504B651C1F170A9F00E43B3E /* Build configuration list for PBXNativeTarget "AppClip" */ = {
 			isa = XCConfigurationList;
@@ -580,6 +591,7 @@
 				504B651E1F170A9F00E43B3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		504B65201F170A9F00E43B3E /* Build configuration list for PBXNativeTarget "AppClipTests" */ = {
 			isa = XCConfigurationList;
@@ -588,6 +600,7 @@
 				504B65221F170A9F00E43B3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
