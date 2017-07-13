@@ -48,7 +48,7 @@ extension Socket {
         case listenFailed
     }
 
-    class func tcpSocket(listenAddress: String? = nil, port: in_port_t, maxPendingConnection: Int32 = SOMAXCONN) throws -> Socket {
+    class func tcpSocketForListen(address: String? = nil, port: in_port_t, maxPendingConnection: Int32 = SOMAXCONN) throws -> Socket {
         let socketFileDescriptor = socket(AF_INET, SOCK_STREAM, 0)
         if socketFileDescriptor == -1 {
             throw Error.socketCreationFailed
@@ -68,7 +68,7 @@ extension Socket {
             sin_addr: in_addr(s_addr: in_addr_t(0)),
             sin_zero: (0, 0, 0, 0, 0, 0, 0, 0)
         )
-        if let address = listenAddress {
+        if let address = address {
             if address.withCString({ cstring in inet_pton(AF_INET, cstring, &addr.sin_addr) }) != 1 {
                 fatalError("\(address) is not converted.")
             }
