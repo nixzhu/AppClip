@@ -12,7 +12,10 @@ public class HTTPServer {
 
     var socket: Socket?
 
-    public func start(address: String?, port: in_port_t) throws {
+    public init() {
+    }
+
+    public func start(address: String? = nil, port: in_port_t = 8964) throws {
         socket = try Socket.tcpSocketForListen(address: address, port: port)
 
         DispatchQueue.global(qos: .background).async { [weak self] in
