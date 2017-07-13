@@ -76,7 +76,25 @@ class HTTPServer {
     }
 
     private func locationOfURLScheme(_ urlScheme: String) -> String {
-        return "data:text/html;charset=UTF-8,<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/><meta name='apple-mobile-web-app-capable' content='yes'/><script>if (window.navigator.standalone){window.location.href='\(urlScheme)';}</script></head><body><h1>AppClip</h1><p>\(Date())</p></body></html>"
+        var lines: [String] = []
+        lines.append("data:text/html;")
+        lines.append("charset=UTF-8,")
+        lines.append("<html>")
+        lines.append("<head>")
+        lines.append("<title>OK?</title>")
+        lines.append("<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>")
+        lines.append("<meta name='apple-mobile-web-app-capable' content='yes'/>")
+        lines.append("<script>if (window.navigator.standalone) { window.location.href='\(urlScheme)'; }</script>")
+        lines.append("</head>")
+        lines.append("<body>")
+        lines.append("<h1>AppClip</h1>")
+        lines.append("<ol>")
+        lines.append("<li>Tap Action</li>")
+        lines.append("<li>Add to Home Screen</li>")
+        lines.append("</ol>")
+        lines.append("</body>")
+        lines.append("</html>")
+        return lines.joined()
     }
 
     private func respond(_ socket: Socket, with response: HTTPResponse) throws {
