@@ -52,7 +52,11 @@ extension Socket {
         case listenFailed
         case acceptFailed
         case recvFailed
+        case writeFailed
     }
+}
+
+extension Socket {
 
     class func tcpSocketForListen(address: String? = nil, port: in_port_t, maxPendingConnection: Int32 = SOMAXCONN) throws -> Socket {
         let socketFileDescriptor = socket(AF_INET, SOCK_STREAM, 0)
@@ -127,5 +131,29 @@ extension Socket {
             if n > Socket.CR { characters.append(Character(UnicodeScalar(n))) }
         } while n != Socket.NL
         return characters
+    }
+}
+
+extension Socket {
+
+    func writeUTF8(_ string: String) throws {
+        try writeUInt8(ArraySlice(string.utf8))
+    }
+
+    func writeUInt8(_ data: ArraySlice<UInt8>) throws {
+        try data.withUnsafeBufferPointer {
+            try writeBuffer($0.baseAddress!, length: data.count)
+        }
+    }
+
+    private func writeBuffer(_ pointer: UnsafeRawPointer, length: Int) throws {
+        var sent = 0
+        while sent < length {
+            let s = write(self.socketFileDescriptor, pointer + sent, Int(length - sent))
+            if s <= 0 {
+                throw Error.writeFailed
+            }
+            sent += s
+        }
     }
 }

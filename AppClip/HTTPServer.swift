@@ -38,9 +38,20 @@ public class HTTPServer {
         do {
             let request = try parser.readHTTPRequest(socket)
             print("request: \(request)")
+            try respond(socket)
         } catch {
             print(error)
         }
         socket.close()
+    }
+
+    private func respond(_ socket: Socket) throws {
+        try socket.writeUTF8("HTTP/1.1 200 OK\r\n")
+        try socket.writeUTF8("Connecttion: close\r\n")
+        try socket.writeUTF8("Content-Type: text/html\r\n")
+        let htmlString = "<html><head><title>Hello</title></head><body><h1>Hello</h1></body></html>"
+        try socket.writeUTF8("Content-Length: \(htmlString.characters.count)\r\n")
+        try socket.writeUTF8("\r\n")
+        try socket.writeUTF8(htmlString)
     }
 }
