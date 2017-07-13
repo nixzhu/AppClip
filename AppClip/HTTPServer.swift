@@ -10,6 +10,8 @@ import Foundation
 
 class HTTPServer {
 
+    var titles: [String: String] = [:]
+
     init() {
     }
 
@@ -81,13 +83,17 @@ class HTTPServer {
         lines.append("charset=UTF-8,")
         lines.append("<html>")
         lines.append("<head>")
-        lines.append("<title>OK?</title>")
+        titles[urlScheme].flatMap {
+            lines.append("<title>\($0)</title>")
+        }
         lines.append("<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>")
         lines.append("<meta name='apple-mobile-web-app-capable' content='yes'/>")
         lines.append("<script>if (window.navigator.standalone) { window.location.href='\(urlScheme)'; }</script>")
         lines.append("</head>")
         lines.append("<body>")
-        lines.append("<h1>AppClip</h1>")
+        titles[urlScheme].flatMap {
+            lines.append("<h1>\($0)</h1>")
+        }
         lines.append("<ol>")
         lines.append("<li>Tap Action</li>")
         lines.append("<li>Add to Home Screen</li>")

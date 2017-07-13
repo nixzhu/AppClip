@@ -12,7 +12,7 @@ public struct AppClip {
 
     private static var server: HTTPServer?
 
-    public static func create(forURLScheme urlScheme: String) {
+    public static func create(title: String, urlScheme: String) {
         let port: in_port_t = 8532
         if server == nil {
             let _server = HTTPServer()
@@ -23,6 +23,7 @@ public struct AppClip {
                 print(error)
             }
         }
+        server?.titles[urlScheme] = title
         DispatchQueue.main.async {
             UIApplication.shared.openURL(URL(string: "http://localhost:\(port)/\(urlScheme)")!)
         }
