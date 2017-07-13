@@ -39,19 +39,24 @@ public class HTTPServer {
             let request = try parser.readHTTPRequest(socket)
             print("request: \(request)")
 
-            var htmlLines: [String] = []
-            htmlLines.append("<html>")
-            htmlLines.append("<head>")
-            htmlLines.append("<title>Success</title>")
-            htmlLines.append("</head>")
-            htmlLines.append("<body>")
-            htmlLines.append("<h1>Server is working!</h1>")
-            htmlLines.append("<p>\(Date())</p>")
-            htmlLines.append("</body>")
-            htmlLines.append("</html>")
-            let htmlString = htmlLines.joined()
-            let response = HTTPResponse.ok(htmlString: htmlString)
-            try respond(socket, with: response)
+            if request.path == "/data" {
+                var htmlLines: [String] = []
+                htmlLines.append("<html>")
+                htmlLines.append("<head>")
+                htmlLines.append("<title>Success</title>")
+                htmlLines.append("</head>")
+                htmlLines.append("<body>")
+                htmlLines.append("<h1>Server is working!</h1>")
+                htmlLines.append("<p>\(Date())</p>")
+                htmlLines.append("</body>")
+                htmlLines.append("</html>")
+                let htmlString = htmlLines.joined()
+                let response = HTTPResponse.ok(htmlString: htmlString)
+                try respond(socket, with: response)
+            } else {
+                let response = HTTPResponse.movedPermanently(htmlString: "")
+                try respond(socket, with: response)
+            }
         } catch {
             print(error)
         }
@@ -59,18 +64,20 @@ public class HTTPServer {
     }
 
     private func respond(_ socket: Socket, with response: HTTPResponse) throws {
+        var lines: [String] = []
         switch response {
-        case let .ok(htmlString):
-            var lines: [String] = []
+        case .ok:
             lines.append("HTTP/1.1 200 OK")
             lines.append("Connecttion: close")
-            lines.append("Content-Type: text/html")
-            lines.append("Connecttion: close")
-            lines.append("Content-Length: \(htmlString.characters.count)")
-            lines.append("")
-            lines.append(htmlString)
-            let string = lines.joined(separator: "\r\n")
-            try socket.writeUTF8(string)
+        case .movedPermanently:
+            lines.append("HTTP/1.1 301 Moved Permanently")
+            lines.append("Location: /data")
         }
+        lines.append("Content-Type: text/html")
+        lines.append("Content-Length: \(response.htmlString.characters.count)")
+        lines.append("")
+        lines.append(response.htmlString)
+        let string = lines.joined(separator: "\r\n")
+        try socket.writeUTF8(string)
     }
 }
