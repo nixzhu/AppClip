@@ -24,7 +24,7 @@ public struct AppClip {
             }
         }
         DispatchQueue.main.async {
-            UIApplication.shared.openURL(URL(string: "http://localhost:\(port)/")!)
+            UIApplication.shared.openURL(URL(string: "http://localhost:\(port)/\(urlScheme)")!)
         }
     }
 }

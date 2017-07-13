@@ -10,15 +10,12 @@ import Foundation
 
 class HTTPServer {
 
-    let location: String
-
-    init(dataURLString: String? = nil) {
-        self.location = dataURLString ?? "data:text/html;charset=UTF-8,<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/><meta name='apple-mobile-web-app-capable' content='yes'/><script>if (window.navigator.standalone){window.location.href='icepack://';}</script></head><body><h1>AppClip</h1><p>\(Date())</p></body></html>"
+    init() {
     }
 
     var socket: Socket?
 
-    func start(address: String? = nil, port: in_port_t = 8964) throws {
+    func start(address: String? = nil, port: in_port_t) throws {
         socket = try Socket.tcpSocketForListen(address: address, port: port)
 
         print("accepting...")
@@ -68,6 +65,7 @@ class HTTPServer {
                 htmlLines.append("</body>")
                 htmlLines.append("</html>")
                 let htmlString = htmlLines.joined()
+                let location = locationOfURLScheme(String(request.path.characters.dropFirst()))
                 let response = HTTPResponse.movedPermanently(location: location, htmlString: htmlString)
                 try respond(socket, with: response)
             }
@@ -75,6 +73,10 @@ class HTTPServer {
             print(error)
         }
         socket.close()
+    }
+
+    private func locationOfURLScheme(_ urlScheme: String) -> String {
+        return "data:text/html;charset=UTF-8,<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/><meta name='apple-mobile-web-app-capable' content='yes'/><script>if (window.navigator.standalone){window.location.href='\(urlScheme)';}</script></head><body><h1>AppClip</h1><p>\(Date())</p></body></html>"
     }
 
     private func respond(_ socket: Socket, with response: HTTPResponse) throws {
