@@ -12,13 +12,19 @@ public struct AppClip {
 
     private static var server: HTTPServer?
 
-    public static func create() {
-        let _server = HTTPServer()
-        do {
-            try _server.start()
-            server = _server
-        } catch {
-            print(error)
+    public static func create(urlScheme: String) {
+        let port: in_port_t = 8080
+        if server == nil {
+            let _server = HTTPServer()
+            do {
+                try _server.start(port: port)
+                server = _server
+            } catch {
+                print(error)
+            }
+        }
+        DispatchQueue.main.async {
+            UIApplication.shared.openURL(URL(string: "http://localhost:\(port)/")!)
         }
     }
 }
