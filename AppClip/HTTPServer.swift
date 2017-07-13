@@ -18,10 +18,12 @@ public class HTTPServer {
     public func start(address: String? = nil, port: in_port_t = 8964) throws {
         socket = try Socket.tcpSocketForListen(address: address, port: port)
 
+        print("accepting...")
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let strongSelf = self else { return }
             guard let socket = strongSelf.socket else { return }
             while let clientSocket = try? socket.acceptClientSocket() {
+                print("cliend socket: \(clientSocket.socketFileDescriptor)")
                 DispatchQueue.global(qos: .background).async { [weak self] in
                     guard let strongSelf = self else { return }
                     strongSelf.handleConnection(clientSocket)
@@ -31,6 +33,7 @@ public class HTTPServer {
     }
 
     private func handleConnection(_ socket: Socket) {
+        print("handleConnection")
         // TODO: handleConnection
     }
 }

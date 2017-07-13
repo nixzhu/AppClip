@@ -54,6 +54,7 @@ extension Socket {
         if socketFileDescriptor == -1 {
             throw Error.socketCreationFailed
         }
+        print("create socket: \(socketFileDescriptor)")
 
         var value: Int32 = 1
         if setsockopt(socketFileDescriptor, SOL_SOCKET, SO_REUSEADDR, &value, socklen_t(MemoryLayout<Int32>.size)) == -1 {
@@ -61,6 +62,7 @@ extension Socket {
             throw Error.socketSettingReUseAddrFailed
         }
         Socket.setNoSigPipe(socketFileDescriptor)
+        print("set socket opt")
 
         var addr = sockaddr_in(
             sin_len: UInt8(MemoryLayout<sockaddr_in>.stride),
@@ -81,11 +83,13 @@ extension Socket {
             Socket.close(socketFileDescriptor)
             throw Error.bindFailed
         }
+        print("bind addr: \(addr.sin_addr)")
 
         if listen(socketFileDescriptor, maxPendingConnection) == -1 {
             Socket.close(socketFileDescriptor)
             throw Error.listenFailed
         }
+        print("listen")
 
         return Socket(socketFileDescriptor: socketFileDescriptor)
     }
