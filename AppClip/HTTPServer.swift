@@ -38,20 +38,35 @@ public class HTTPServer {
         do {
             let request = try parser.readHTTPRequest(socket)
             print("request: \(request)")
-            try respond(socket)
+
+            var htmlLines: [String] = []
+            htmlLines.append("<html>")
+            htmlLines.append("<head>")
+            htmlLines.append("<title>Success</title>")
+            htmlLines.append("</head>")
+            htmlLines.append("<body>")
+            htmlLines.append("<h1>Server is working!</h1>")
+            htmlLines.append("<p>\(Date())</p>")
+            htmlLines.append("</body>")
+            htmlLines.append("</html>")
+            let htmlString = htmlLines.joined(separator: "\n")
+            try respond(socket, htmlString: htmlString)
         } catch {
             print(error)
         }
         socket.close()
     }
 
-    private func respond(_ socket: Socket) throws {
-        try socket.writeUTF8("HTTP/1.1 200 OK\r\n")
-        try socket.writeUTF8("Connecttion: close\r\n")
-        try socket.writeUTF8("Content-Type: text/html\r\n")
-        let htmlString = "<html><head><title>Hello</title></head><body><h1>Hello</h1></body></html>"
-        try socket.writeUTF8("Content-Length: \(htmlString.characters.count)\r\n")
-        try socket.writeUTF8("\r\n")
-        try socket.writeUTF8(htmlString)
+    private func respond(_ socket: Socket, htmlString: String) throws {
+        var lines: [String] = []
+        lines.append("HTTP/1.1 200 OK")
+        lines.append("Connecttion: close")
+        lines.append("Content-Type: text/html")
+        lines.append("Connecttion: close")
+        lines.append("Content-Length: \(htmlString.characters.count)")
+        lines.append("")
+        lines.append(htmlString)
+        let string = lines.joined(separator: "\r\n")
+        try socket.writeUTF8(string)
     }
 }
