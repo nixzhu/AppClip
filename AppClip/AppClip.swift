@@ -13,7 +13,7 @@ public struct AppClip {
     private static var server: HTTPServer?
 
     public static func create(urlScheme: String) {
-        let port: in_port_t = 8080
+        let port: in_port_t = 8532
         if server == nil {
             let _server = HTTPServer()
             do {
