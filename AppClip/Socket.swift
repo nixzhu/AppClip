@@ -37,6 +37,9 @@ class Socket {
         var no_sig_pipe: Int32 = 1
         setsockopt(socket, SOL_SOCKET, SO_NOSIGPIPE, &no_sig_pipe, socklen_t(MemoryLayout<Int32>.size))
     }
+
+    fileprivate static let CR = UInt8(13)
+    fileprivate static let NL = UInt8(10)
 }
 
 extension Socket {
@@ -47,6 +50,7 @@ extension Socket {
         case bindFailed
         case listenFailed
         case acceptFailed
+        case recvFailed
     }
 
     class func tcpSocketForListen(address: String? = nil, port: in_port_t, maxPendingConnection: Int32 = SOMAXCONN) throws -> Socket {
@@ -103,5 +107,24 @@ extension Socket {
         }
         Socket.setNoSigPipe(clientSocket)
         return Socket(socketFileDescriptor: clientSocket)
+    }
+
+    func read() throws -> UInt8 {
+        var buffer = [UInt8](repeating: 0, count: 1)
+        let next = recv(self.socketFileDescriptor as Int32, &buffer, Int(buffer.count), 0)
+        if next <= 0 {
+            throw Error.recvFailed
+        }
+        return buffer[0]
+    }
+
+    func readLine() throws -> String {
+        var characters: String = ""
+        var n: UInt8 = 0
+        repeat {
+            n = try self.read()
+            if n > Socket.CR { characters.append(Character(UnicodeScalar(n))) }
+        } while n != Socket.NL
+        return characters
     }
 }
