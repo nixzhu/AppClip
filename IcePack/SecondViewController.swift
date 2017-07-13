@@ -12,6 +12,6 @@ import AppClip
 class SecondViewController: UIViewController {
 
     @IBAction func createAppClip(_ sender: UIButton) {
-        AppClip.create(urlScheme: "icepack://com.nixWork.IcePack/tab2")
+        AppClip.create(forURLScheme: "icepack://com.nixWork.IcePack/tab2")
     }
 }
