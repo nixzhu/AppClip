@@ -17,3 +17,14 @@ class HTTPRequest {
     init() {
     }
 }
+
+extension HTTPRequest: CustomStringConvertible {
+
+    var description: String {
+        var lines: [String] = []
+        lines.append("method: \(method)")
+        lines.append("path: \(path)")
+        lines.append("queryParams: \(queryParams)")
+        return lines.joined(separator: ", ")
+    }
+}

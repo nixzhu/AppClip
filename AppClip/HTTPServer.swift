@@ -33,7 +33,13 @@ public class HTTPServer {
     }
 
     private func handleConnection(_ socket: Socket) {
-        print("handleConnection")
-        // TODO: handleConnection
+        print("handle connection")
+        let parser = HTTPRequestParser()
+        do {
+            let request = try parser.readHTTPRequest(socket)
+            print("request: \(request)")
+        } catch {
+            print(error)
+        }
     }
 }
