@@ -10,10 +10,13 @@ import Foundation
 
 public class HTTPServer {
 
-    var socket: Socket?
+    let location: String
 
-    public init() {
+    public init(dataURLString: String? = nil) {
+        self.location = dataURLString ?? "data:text/html;charset=UTF-8,<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/><meta name='apple-mobile-web-app-capable' content='yes'/></head><body><h1>AppClip</h1><p>\(Date())</p></body></html>"
     }
+
+    var socket: Socket?
 
     public func start(address: String? = nil, port: in_port_t = 8964) throws {
         socket = try Socket.tcpSocketForListen(address: address, port: port)
@@ -40,7 +43,7 @@ public class HTTPServer {
             print("request: \(request)")
 
             switch request.path {
-            case "/success":
+            case "/test":
                 var htmlLines: [String] = []
                 htmlLines.append("<html>")
                 htmlLines.append("<head>")
@@ -55,7 +58,6 @@ public class HTTPServer {
                 let response = HTTPResponse.ok(htmlString: htmlString)
                 try respond(socket, with: response)
             default:
-                let location = "data:text/html;charset=UTF-8,<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/><meta name='apple-mobile-web-app-capable' content='yes'/></head><body><h1>Space</h1></body></html>"
                 var htmlLines: [String] = []
                 htmlLines.append("<html>")
                 htmlLines.append("<head>")
