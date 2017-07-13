@@ -10,12 +10,12 @@ import Foundation
 
 enum HTTPResponse {
     case ok(htmlString: String)
-    case movedPermanently(htmlString: String)
+    case movedPermanently(location: String, htmlString: String)
 
     var htmlString: String {
         switch self {
         case let .ok(htmlString): return htmlString
-        case let .movedPermanently(htmlString): return htmlString
+        case let .movedPermanently(_, htmlString): return htmlString
         }
     }
 }

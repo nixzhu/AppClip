@@ -54,7 +54,7 @@ public class HTTPServer {
                 let response = HTTPResponse.ok(htmlString: htmlString)
                 try respond(socket, with: response)
             } else {
-                let response = HTTPResponse.movedPermanently(htmlString: "")
+                let response = HTTPResponse.movedPermanently(location: "/data", htmlString: "")
                 try respond(socket, with: response)
             }
         } catch {
@@ -69,9 +69,9 @@ public class HTTPServer {
         case .ok:
             lines.append("HTTP/1.1 200 OK")
             lines.append("Connecttion: close")
-        case .movedPermanently:
+        case let .movedPermanently(location, _):
             lines.append("HTTP/1.1 301 Moved Permanently")
-            lines.append("Location: /data")
+            lines.append("Location: \(location)")
         }
         lines.append("Content-Type: text/html")
         lines.append("Content-Length: \(response.htmlString.characters.count)")
