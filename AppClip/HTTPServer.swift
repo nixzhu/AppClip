@@ -58,18 +58,8 @@ class HTTPServer {
                 let response = HTTPResponse.ok(htmlString: htmlString)
                 try respond(socket, with: response)
             default:
-                var htmlLines: [String] = []
-                htmlLines.append("<html>")
-                htmlLines.append("<head>")
-                htmlLines.append("<title>Redirecting</title>")
-                htmlLines.append("</head>")
-                htmlLines.append("<body>")
-                htmlLines.append("<h1>Redirecting...</h1>")
-                htmlLines.append("</body>")
-                htmlLines.append("</html>")
-                let htmlString = htmlLines.joined()
                 let location = locationOfURLScheme(String(request.path.characters.dropFirst()))
-                let response = HTTPResponse.movedPermanently(location: location, htmlString: htmlString)
+                let response = HTTPResponse.movedPermanently(location: location, htmlString: "<html></html>")
                 try respond(socket, with: response)
             }
         } catch {
