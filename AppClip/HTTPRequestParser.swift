@@ -23,11 +23,9 @@ struct HTTPRequestParser {
         if statusLineTokens.count < 3 {
             throw Error.invalidStatusLine
         }
-        let request = HTTPRequest()
-        request.method = statusLineTokens[0]
-        request.path = statusLineTokens[1]
-        request.queryParams = extractQueryParams(request.path)
-        return request
+        let method = statusLineTokens[0]
+        let path = statusLineTokens[1]
+        return HTTPRequest(method: method, path: path, queryParams: extractQueryParams(path))
     }
 
     static private func extractQueryParams(_ url: String) -> [(String, String)] {

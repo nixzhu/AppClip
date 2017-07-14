@@ -8,13 +8,16 @@
 
 import Foundation
 
-class HTTPRequest {
+struct HTTPRequest {
 
-    var method: String = ""
-    var path: String = ""
-    var queryParams: [(String, String)] = []
+    let method: String
+    let path: String
+    let queryParams: [(String, String)]
 
-    init() {
+    init(method: String, path: String, queryParams: [(String, String)]) {
+        self.method = method
+        self.path = path
+        self.queryParams = queryParams
     }
 }
 
