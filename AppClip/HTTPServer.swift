@@ -77,11 +77,21 @@ class HTTPServer {
         icons[urlScheme].flatMap {
             lines.append("<link rel='apple-touch-icon' href='data:image/png;base64,\($0)'/>")
         }
+        lines.append("<style type='text/css'>")
+        lines.append("html { height: 100%; box-sizing: border-box; }")
+        lines.append("*, *:before, *:after { box-sizing: inherit; }")
+        lines.append("body { position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%; }")
+        lines.append(".main { margin: 0 auto; padding-top: 24px; padding: 1rem; }")
+        lines.append(".footer { position: absolute; right: 0; bottom: 0; left: 0; padding: 1rem; }")
+        lines.append(".app_clip { float: right; color: #E2E2E2; font-size: x-small; }")
+        lines.append("a { color: #D0D0D0; }")
+        lines.append("</style>")
         lines.append("<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>")
         lines.append("<meta name='apple-mobile-web-app-capable' content='yes'/>")
         lines.append("<script>if (window.navigator.standalone) { window.location.href='\(urlScheme)'; }</script>")
         lines.append("</head>")
         lines.append("<body>")
+        lines.append("<div class='main'>")
         titles[urlScheme].flatMap {
             lines.append("<h1>\($0)</h1>")
         }
@@ -89,6 +99,10 @@ class HTTPServer {
         lines.append("<li>Tap Action</li>")
         lines.append("<li>Add to Home Screen</li>")
         lines.append("</ol>")
+        lines.append("<div class='footer'>")
+        lines.append("<p class='app_clip'>Powered by <a href='https://github.com/nixzhu/AppClip'>AppClip</a>.</p>")
+        lines.append("</div>")
+        lines.append("</div>")
         lines.append("</body>")
         lines.append("</html>")
         return lines.joined()
