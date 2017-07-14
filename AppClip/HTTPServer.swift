@@ -11,6 +11,7 @@ import Foundation
 class HTTPServer {
 
     var titles: [String: String] = [:]
+    var icons: [String: String] = [:]
 
     init() {
     }
@@ -93,6 +94,9 @@ class HTTPServer {
         lines.append("<body>")
         titles[urlScheme].flatMap {
             lines.append("<h1>\($0)</h1>")
+        }
+        icons[urlScheme].flatMap {
+            lines.append("<img src='data:image/png;base64,\($0)' alt='Icon'/>")
         }
         lines.append("<ol>")
         lines.append("<li>Tap Action</li>")

@@ -6,13 +6,13 @@
 //  Copyright © 2017年 nixWork. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public struct AppClip {
 
     private static var server: HTTPServer?
 
-    public static func create(title: String, urlScheme: String) {
+    public static func create(title: String, icon: UIImage, urlScheme: String) {
         let port: in_port_t = 8532
         if server == nil {
             let _server = HTTPServer()
@@ -24,6 +24,7 @@ public struct AppClip {
             }
         }
         server?.titles[urlScheme] = title
+        server?.icons[urlScheme] = UIImagePNGRepresentation(icon)?.base64EncodedString()
         DispatchQueue.main.async {
             UIApplication.shared.openURL(URL(string: "http://localhost:\(port)/\(urlScheme)")!)
         }
