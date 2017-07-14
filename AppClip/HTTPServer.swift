@@ -36,9 +36,8 @@ class HTTPServer {
 
     private func handleConnection(_ socket: Socket) {
         print("handle connection")
-        let parser = HTTPRequestParser()
         do {
-            let request = try parser.readHTTPRequest(socket)
+            let request = try HTTPRequestParser.readHTTPRequest(fromSocket: socket)
             print("request: \(request)")
             switch request.path {
             case "/test":

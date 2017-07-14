@@ -8,16 +8,16 @@
 
 import Foundation
 
-class HTTPRequestParser {
+struct HTTPRequestParser {
 
     enum Error: Swift.Error {
         case invalidStatusLine
     }
 
-    init() {
+    private init() {
     }
 
-    func readHTTPRequest(_ socket: Socket) throws -> HTTPRequest {
+    static func readHTTPRequest(fromSocket socket: Socket) throws -> HTTPRequest {
         let statusLine = try socket.readLine()
         let statusLineTokens = statusLine.components(separatedBy: " ")
         if statusLineTokens.count < 3 {
@@ -30,7 +30,7 @@ class HTTPRequestParser {
         return request
     }
 
-    private func extractQueryParams(_ url: String) -> [(String, String)] {
+    static private func extractQueryParams(_ url: String) -> [(String, String)] {
         guard let questionMark = url.characters.index(of: "?") else {
             return []
         }
