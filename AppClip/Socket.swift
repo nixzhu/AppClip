@@ -38,9 +38,6 @@ class Socket {
         var no_sig_pipe: Int32 = 1
         setsockopt(socket, SOL_SOCKET, SO_NOSIGPIPE, &no_sig_pipe, socklen_t(MemoryLayout<Int32>.size))
     }
-
-    fileprivate static let CR = UInt8(13)
-    fileprivate static let NL = UInt8(10)
 }
 
 extension Socket {
@@ -123,6 +120,9 @@ extension Socket {
         return buffer[0]
     }
 
+    private static let CR = UInt8(13)
+    private static let NL = UInt8(10)
+
     func readLine() throws -> String {
         var characters: String = ""
         var n: UInt8 = 0
@@ -140,7 +140,7 @@ extension Socket {
         try writeUInt8(ArraySlice(string.utf8))
     }
 
-    func writeUInt8(_ data: ArraySlice<UInt8>) throws {
+    private func writeUInt8(_ data: ArraySlice<UInt8>) throws {
         try data.withUnsafeBufferPointer {
             try writeBuffer($0.baseAddress!, length: data.count)
         }
