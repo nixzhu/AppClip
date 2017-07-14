@@ -14,19 +14,27 @@ public struct AppClip {
 
     public static func create(title: String, icon: UIImage, urlScheme: String) {
         let port: in_port_t = 8532
-        if server == nil {
+        func openSafariToRequest(_ server: HTTPServer) {
+            server.titles[urlScheme] = title
+            server.icons[urlScheme] = UIImagePNGRepresentation(icon)?.base64EncodedString()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                guard let url = URL(string: "http://localhost:\(port)/\(urlScheme)") else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.openURL(url)
+                }
+            }
+        }
+        if let server = server {
+            openSafariToRequest(server)
+        } else {
             let _server = HTTPServer()
             do {
                 try _server.start(port: port)
                 server = _server
+                openSafariToRequest(_server)
             } catch {
                 print(error)
             }
-        }
-        server?.titles[urlScheme] = title
-        server?.icons[urlScheme] = UIImagePNGRepresentation(icon)?.base64EncodedString()
-        DispatchQueue.main.async {
-            UIApplication.shared.openURL(URL(string: "http://localhost:\(port)/\(urlScheme)")!)
         }
     }
 }
