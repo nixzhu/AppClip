@@ -12,6 +12,6 @@ import AppClip
 class FirstViewController: UIViewController {
 
     @IBAction func createAppClip(_ sender: UIButton) {
-        AppClip.create(title: "First Tab", icon: #imageLiteral(resourceName: "icon_circle"), urlScheme: "icepack://com.nixWork.IcePack/tab1")
+        AppClip.create(title: "First View", icon: #imageLiteral(resourceName: "icon_circle"), urlScheme: "icepack://com.nixWork.IcePack/tab1")
     }
 }

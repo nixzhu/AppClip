@@ -87,6 +87,9 @@ class HTTPServer {
         titles[urlScheme].flatMap {
             lines.append("<title>\($0)</title>")
         }
+        icons[urlScheme].flatMap {
+            lines.append("<link rel='apple-touch-icon' href='data:image/png;base64,\($0)'/>")
+        }
         lines.append("<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>")
         lines.append("<meta name='apple-mobile-web-app-capable' content='yes'/>")
         lines.append("<script>if (window.navigator.standalone) { window.location.href='\(urlScheme)'; }</script>")
@@ -94,9 +97,6 @@ class HTTPServer {
         lines.append("<body>")
         titles[urlScheme].flatMap {
             lines.append("<h1>\($0)</h1>")
-        }
-        icons[urlScheme].flatMap {
-            lines.append("<img src='data:image/png;base64,\($0)' alt='Icon'/>")
         }
         lines.append("<ol>")
         lines.append("<li>Tap Action</li>")
