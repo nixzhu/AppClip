@@ -94,9 +94,8 @@ class HTTPServer {
         lines.append("</head>")
         lines.append("<body>")
         lines.append("<div class='main'>")
-        toturialImages[urlScheme].flatMap {
-            lines.append("<img class='tutorial' src='data:image/jpeg;base64,\($0)'/>")
-        }
+        let tutorialImageBase64String = toturialImages[urlScheme] ?? defaultTutorialImageBase64String
+        lines.append("<img class='tutorial' src='data:image/jpeg;base64,\(tutorialImageBase64String)'/>")
         lines.append("<div class='footer'>")
         lines.append("<p class='app_clip'>Powered by <a href='https://github.com/nixzhu/AppClip'>AppClip</a>.</p>")
         lines.append("</div>")

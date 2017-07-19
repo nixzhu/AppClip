@@ -24,6 +24,7 @@
 		504B652A1F17210E00E43B3E /* HTTPRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B65291F17210E00E43B3E /* HTTPRequestParser.swift */; };
 		504B652C1F17481E00E43B3E /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B652B1F17481E00E43B3E /* HTTPResponse.swift */; };
 		504B65301F176A4D00E43B3E /* AppClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B652F1F176A4D00E43B3E /* AppClip.swift */; };
+		50DED4A91F1F380E00E192D6 /* TutorialImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DED4A81F1F380E00E192D6 /* TutorialImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		504B65291F17210E00E43B3E /* HTTPRequestParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestParser.swift; sourceTree = "<group>"; };
 		504B652B1F17481E00E43B3E /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
 		504B652F1F176A4D00E43B3E /* AppClip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppClip.swift; sourceTree = "<group>"; };
+		50DED4A81F1F380E00E192D6 /* TutorialImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 				504B65271F17206100E43B3E /* HTTPRequest.swift */,
 				504B65291F17210E00E43B3E /* HTTPRequestParser.swift */,
 				504B652B1F17481E00E43B3E /* HTTPResponse.swift */,
+				50DED4A81F1F380E00E192D6 /* TutorialImage.swift */,
 				504B65081F170A9E00E43B3E /* Info.plist */,
 			);
 			path = AppClip;
@@ -331,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				504B652A1F17210E00E43B3E /* HTTPRequestParser.swift in Sources */,
+				50DED4A91F1F380E00E192D6 /* TutorialImage.swift in Sources */,
 				504B65301F176A4D00E43B3E /* AppClip.swift in Sources */,
 				504B65281F17206100E43B3E /* HTTPRequest.swift in Sources */,
 				504B652C1F17481E00E43B3E /* HTTPResponse.swift in Sources */,
