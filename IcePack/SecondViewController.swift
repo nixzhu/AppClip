@@ -12,6 +12,6 @@ import AppClip
 class SecondViewController: UIViewController {
 
     @IBAction func createAppClip(_ sender: UIButton) {
-        AppClip.create(title: "Second View", icon: #imageLiteral(resourceName: "icon_rectangle"), urlScheme: "icepack://com.nixWork.IcePack/tab2")
+        AppClip.create(title: "Second View", icon: #imageLiteral(resourceName: "icon_rectangle"), urlScheme: "icepack://com.nixWork.IcePack/tab2", toturialImage: #imageLiteral(resourceName: "toturial"))
     }
 }

@@ -12,6 +12,7 @@ class HTTPServer {
 
     var titles: [String: String] = [:]
     var icons: [String: String] = [:]
+    var toturialImages: [String: String] = [:]
 
     init() {
     }
@@ -94,6 +95,9 @@ class HTTPServer {
         lines.append("<div class='main'>")
         titles[urlScheme].flatMap {
             lines.append("<h1>\($0)</h1>")
+        }
+        toturialImages[urlScheme].flatMap {
+            lines.append("<img src='data:image/jpeg;base64,\($0)'/>")
         }
         lines.append("<ol>")
         lines.append("<li>Tap Action</li>")
