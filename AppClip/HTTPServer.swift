@@ -82,8 +82,9 @@ class HTTPServer {
         lines.append("html { height: 100%; box-sizing: border-box; }")
         lines.append("*, *:before, *:after { box-sizing: inherit; }")
         lines.append("body { position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%; }")
-        lines.append(".main { margin: 0 auto; padding-top: 24px; padding: 1rem; }")
+        lines.append(".main { margin: 0 auto; padding-top: 24px; padding: 0.5rem; }")
         lines.append(".footer { position: absolute; right: 0; bottom: 0; left: 0; padding: 1rem; }")
+        lines.append(".tutorial { width: 100%; }")
         lines.append(".app_clip { float: right; color: #E2E2E2; font-size: x-small; }")
         lines.append("a { color: #D0D0D0; }")
         lines.append("</style>")
@@ -93,16 +94,9 @@ class HTTPServer {
         lines.append("</head>")
         lines.append("<body>")
         lines.append("<div class='main'>")
-        titles[urlScheme].flatMap {
-            lines.append("<h1>\($0)</h1>")
-        }
         toturialImages[urlScheme].flatMap {
-            lines.append("<img src='data:image/jpeg;base64,\($0)'/>")
+            lines.append("<img class='tutorial' src='data:image/jpeg;base64,\($0)'/>")
         }
-        lines.append("<ol>")
-        lines.append("<li>Tap Action</li>")
-        lines.append("<li>Add to Home Screen</li>")
-        lines.append("</ol>")
         lines.append("<div class='footer'>")
         lines.append("<p class='app_clip'>Powered by <a href='https://github.com/nixzhu/AppClip'>AppClip</a>.</p>")
         lines.append("</div>")
