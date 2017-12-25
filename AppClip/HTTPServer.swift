@@ -22,12 +22,12 @@ class HTTPServer {
     func start(address: String? = nil, port: in_port_t) throws {
         socket = try Socket.tcpSocketForListen(address: address, port: port)
         print("accepting...")
-        DispatchQueue.global(qos: .background).async { [weak self] in
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let strongSelf = self else { return }
             guard let socket = strongSelf.socket else { return }
             while let clientSocket = try? socket.acceptClientSocket() {
                 print("cliend socket: \(clientSocket.socketFileDescriptor)")
-                DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                DispatchQueue.main.async { [weak self] in
                     guard let strongSelf = self else { return }
                     strongSelf.handleConnection(clientSocket)
                 }
