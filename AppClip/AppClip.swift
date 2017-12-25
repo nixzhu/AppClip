@@ -12,8 +12,7 @@ public struct AppClip {
 
     private static var server: HTTPServer?
 
-    public static func create(title: String, icon: UIImage, urlScheme: String, toturialImage: UIImage? = nil) {
-        let port: in_port_t = 8532
+    public static func create(title: String, icon: UIImage, urlScheme: String, toturialImage: UIImage? = nil, port: in_port_t = 1989) {
         func openSafariToRequest(_ server: HTTPServer) {
             server.titles[urlScheme] = title
             server.icons[urlScheme] = UIImagePNGRepresentation(icon)?.base64EncodedString()
