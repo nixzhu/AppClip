@@ -90,6 +90,7 @@ class HTTPServer {
         lines.append("</style>")
         lines.append("<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>")
         lines.append("<meta name='apple-mobile-web-app-capable' content='yes'/>")
+        lines.append("<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'>")
         lines.append("<script>if (window.navigator.standalone) { window.location.href='\(urlScheme)'; }</script>")
         lines.append("</head>")
         lines.append("<body>")
