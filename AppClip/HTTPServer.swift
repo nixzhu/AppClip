@@ -56,7 +56,7 @@ class HTTPServer {
                 let response = HTTPResponse.ok(htmlString: htmlString)
                 try respond(socket, with: response)
             default:
-                let location = locationOfURLScheme(String(request.path.characters.dropFirst()))
+                let location = locationOfURLScheme(String(request.path.dropFirst()))
                 let response = HTTPResponse.movedPermanently(location: location, htmlString: "<html></html>")
                 try respond(socket, with: response)
             }
@@ -117,7 +117,7 @@ class HTTPServer {
         }
         let htmlString = response.htmlString
         lines.append("Content-Type: text/html")
-        lines.append("Content-Length: \(htmlString.characters.count)")
+        lines.append("Content-Length: \(htmlString.count)")
         lines.append("")
         lines.append(htmlString)
         let string = lines.joined(separator: "\r\n")
